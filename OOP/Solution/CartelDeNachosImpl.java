@@ -14,8 +14,6 @@ public class CartelDeNachosImpl implements CartelDeNachos{
 
     }
 
-    @override public class ImpossibleConnectionException     extends Exception {}
-
     /**
      * add a profesor to the cartel.
      *
@@ -23,8 +21,10 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      * @param name - the name of the profesor
      * @return the Profesor added
      * */
-    @override public Profesor joinCartel(int id, String name)
-            throws Profesor.ProfesorAlreadyInSystemException;
+    @Override public Profesor joinCartel(int id, String name)
+            throws Profesor.ProfesorAlreadyInSystemException{
+
+    }
 
     /**
      * add a casa de burrito to the cartel
@@ -34,32 +34,42 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      * @param menu - the set of menu items of the casa de burrito
      * @return the CasaDeBurrito added
      * */
-    @override public CasaDeBurrito addCasaDeBurrito(int id, String name, int dist, Set<String> menu)
-            throws CasaDeBurrito.CasaDeBurritoAlreadyInSystemException;
+    @Override public CasaDeBurrito addCasaDeBurrito(int id, String name, int dist, Set<String> menu)
+            throws CasaDeBurrito.CasaDeBurritoAlreadyInSystemException{
+
+    }
 
     /**
      * @return a collection of all profesores in the cartel
      * */
-    @override public  Collection<Profesor> registeredProfesores();
+    @Override public  Collection<Profesor> registeredProfesores(){
+
+    }
 
     /**
      * @return a collection of all casas de burrito in the cartel
      * */
-    @override public Collection<CasaDeBurrito> registeredCasasDeBurrito();
+    @Override public Collection<CasaDeBurrito> registeredCasasDeBurrito(){
+
+    }
 
     /**
      * @return the profesor in the cartel by the id given
      * @param id - the id of the profesor to look for in the cartel
      * */
-    @override public Profesor getProfesor(int id)
-            throws Profesor.ProfesorNotInSystemException;
+    @Override public Profesor getProfesor(int id)
+            throws Profesor.ProfesorNotInSystemException{
+
+    }
 
     /**
      * @return the casa de burrito in the cartel by the id given
      * @param id - the id of the casa de burrito to look for in the cartel
      * */
-    @override public CasaDeBurrito getCasaDeBurrito(int id)
-            throws CasaDeBurrito.CasaDeBurritoNotInSystemException;
+    @Override public CasaDeBurrito getCasaDeBurrito(int id)
+            throws CasaDeBurrito.CasaDeBurritoNotInSystemException{
+
+    }
 
     /**
      * add a connection of friendship between the two profesores received.
@@ -69,8 +79,10 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      * @param p1 - the first profesor
      * @param p2 - the second profesor
      * */
-    @override public CartelDeNachos addConnection(Profesor p1, Profesor p2)
-            throws Profesor.ProfesorNotInSystemException, Profesor.ConnectionAlreadyExistsException, Profesor.SameProfesorException;
+    @Override public CartelDeNachos addConnection(Profesor p1, Profesor p2)
+            throws Profesor.ProfesorNotInSystemException, Profesor.ConnectionAlreadyExistsException, Profesor.SameProfesorException{
+
+    }
 
     /**
      * returns a collection of casas de burrito favored by the friends of the received profesor,
@@ -78,8 +90,10 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      *
      * @param p - the profesor whom in relation to him, favored casas de burrito by his friends are considered
      * */
-    @override public Collection<CasaDeBurrito> favoritesByRating(Profesor p)
-            throws Profesor.ProfesorNotInSystemException;
+    @Override public Collection<CasaDeBurrito> favoritesByRating(Profesor p)
+            throws Profesor.ProfesorNotInSystemException{
+
+    }
 
     /**
      * returns a collection of casas de burrito favored by the friends of the received profesor,
@@ -87,8 +101,10 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      *
      * @param p - the profesor whom in relation to him, favored casas de burrito by his friends are considered
      * */
-    @override public  Collection<CasaDeBurrito> favoritesByDist(Profesor p)
-            throws Profesor.ProfesorNotInSystemException;
+    @Override public  Collection<CasaDeBurrito> favoritesByDist(Profesor p)
+            throws Profesor.ProfesorNotInSystemException{
+
+    }
 
     /**
      * check whether the casa de burrito received is t-recommended by the received profesor (definition in the PDF)
@@ -99,13 +115,17 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      *
      * @return whether s t-recommends r
      * */
-    @override public  boolean getRecommendation(Profesor p, CasaDeBurrito c, int t)
-            throws Profesor.ProfesorNotInSystemException, CasaDeBurrito.CasaDeBurritoNotInSystemException, CartelDeNachos.ImpossibleConnectionException;
+    @Override public  boolean getRecommendation(Profesor p, CasaDeBurrito c, int t)
+            throws Profesor.ProfesorNotInSystemException, CasaDeBurrito.CasaDeBurritoNotInSystemException, CartelDeNachos.ImpossibleConnectionException{
+
+    }
 
     /**
      * @return a list of the most popular casas-de-burrito's ids in the cartel.
      * */
-    @override public List<Integer> getMostPopularRestaurantsIds();
+    @Override public List<Integer> getMostPopularRestaurantsIds(){
+
+    }
 
     /**
      * @return the cartel's description as a string in the following format:
@@ -129,6 +149,8 @@ public class CartelDeNachosImpl implements CartelDeNachos{
      * 555555 -> [1].
      * End profesores.
      * */
-    @override public String toString();
+    @Override public String toString(){
+
+    }
 
 }

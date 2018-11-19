@@ -4,12 +4,12 @@ import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
 import java.util.Set;
 
+/*
+    REMEMBER: if you override "equals" you must also override hashcode!!!
+ */
+
+
 public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
-
-    class CasaDeBurritoAlreadyInSystemException    extends Exception {}
-    class CasaDeBurritoNotInSystemException        extends Exception {}
-    class RateRangeException                       extends Exception {}
-
     public CasaDeBurritoImpl(int id, String name, int dist, Set<String> menu){
 
     }
@@ -17,22 +17,30 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
     /**
      * @return the id of the casa de burrito.
      * */
-    @override public int getId();
+    @Override public int getId(){
+
+    }
 
     /**
      * @return the name of the casa de burrito.
      * */
-    @override public String getName();
+    @Override public String getName(){
+
+    }
 
     /**
      * @return the distance from the Technion.*/
-    @override public int distance();
+    @Override public int distance(){
+
+    }
 
     /**
      * @return true iff the profesor rated this CasaDeBurrito
      * @param p - a profesor
      * */
-    @override public  boolean isRatedBy(Profesor p);
+    @Override public  boolean isRatedBy(Profesor p){
+
+    }
 
     /**
      * rate the CasaDeBurrito by a profesor
@@ -40,18 +48,24 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
      * @param p - the profesor rating the CasaDeBurrito
      * @param r - the rating
      * */
-    @override public OOP.Provided.CasaDeBurrito rate(Profesor p, int r)
-            throws OOP.Provided.CasaDeBurrito.RateRangeException;
+    @Override public OOP.Provided.CasaDeBurrito rate(Profesor p, int r)
+            throws OOP.Provided.CasaDeBurrito.RateRangeException{
+
+    }
 
     /**
      * @return the number of rating the CasaDeBurrito has received
      * */
-    @override public int numberOfRates();
+    @Override public int numberOfRates(){
+
+    }
 
     /**
      * @return the CasaDeBurrito's average rating
      * */
-    @override public double averageRating();
+    @Override public double averageRating(){
+
+    }
 
     /**
      * @return the CasaDeBurrito's description as a string in the following format:
@@ -71,8 +85,12 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
      * Menu: Cola, French Fries, Steak.
      *
      * */
-    @override public String toString();
+    @Override public String toString(){
 
-    @override public int compareTo(CasaDeBurrito casaDeBurrito);
+    }
+
+    @Override public int compareTo(CasaDeBurrito casaDeBurrito){
+
+    }
 
 }
