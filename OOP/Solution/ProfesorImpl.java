@@ -15,9 +15,10 @@ import java.util.function.Predicate;
 public class ProfesorImpl implements Profesor{
     private int id;
     private String name;
+    private Collection<Profesor> Friends;
+    private Collection<CasaDeBurrito> Favorites;
 
-
-
+    
     public ProfesorImpl(int id_t, String name_t){
         id = id_t;
         name = name_t;
