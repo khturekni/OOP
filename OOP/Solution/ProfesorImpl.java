@@ -137,7 +137,7 @@ public class ProfesorImpl implements Profesor{
      * <format>
      * Profesor: <name>.
      * Id: <id>.
-     * favorites: <casaName1, casaName2, casaName3...>
+     * Favorites: <casaName1, casaName2, casaName3...>
      * </format>
      * Note: favorite casas de burrito are ordered by lexicographical order, asc.
      *
@@ -145,13 +145,19 @@ public class ProfesorImpl implements Profesor{
      *
      * Profesor: Oren.
      * Id: 236703.
-     * favorites: BBB, Burger salon.
+     * Favorites: BBB, Burger salon.
      *
      * */
 
     @Override
     public String toString(){
-        return ("Profesor: " + name + ".\nId: " +id + ".\nfavorites: " +favorites.toString());
+        return ("Profesor: " + name + ".\nId: " +id + ".\nFavorites: " +
+                favorites.stream()
+                        .map(c->c.getName())
+                        .collect(Collectors.toList())
+                        .toString()
+                        .replace("[","")
+                        .replace("]","."));
     }
 
 
@@ -176,6 +182,14 @@ public class ProfesorImpl implements Profesor{
         return (int)((((1+Math.sqrt(5))/2)*id) % 503);
     }
 
+    public class compareByName implements Comparator<CasaDeBurrito>{
+        @Override
+        public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2){
+            return (cdb1.getName().compareTo(cdb2.getName()));
+        }
+    }
+
+
     public class compareByRating implements Comparator<CasaDeBurrito>{
         @Override
         public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2){
@@ -196,7 +210,7 @@ public class ProfesorImpl implements Profesor{
         compareByRating cmp_rate;
         compareByDistance cmp_dist;
         /*  by_rate = true ==> compares first by rate, then by distance, then by ID.
-            by_rate = false ==> compares first by diostance, then by rate, then by ID
+            by_rate = false ==> compares first by distance, then by rate, then by ID
         */
         public compareByRateOrDist(boolean by_rate) {
             this.by_rate = by_rate;
