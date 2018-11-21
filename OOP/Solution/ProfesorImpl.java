@@ -114,7 +114,7 @@ public class ProfesorImpl implements Profesor{
      * */
     @Override
     public Collection<CasaDeBurrito> favoritesByRating(int rLimit){
-
+        return favoritesByPred(cdb -> cdb.averageRating() >= rLimit ,true);
     }
 
     /**
@@ -123,9 +123,15 @@ public class ProfesorImpl implements Profesor{
      * */
     @Override
     public Collection<CasaDeBurrito> favoritesByDist(int dLimit){
-
+        return favoritesByPred(cdb -> cdb.distance() <= dLimit, false);
     }
 
+    private Collection<CasaDeBurrito> favoritesByPred(Predicate<CasaDeBurrito> p, boolean by_rate){
+        return favorites.stream()
+                .filter(p)
+                .sorted(new compareByRateOrDist(by_rate))
+                .collect(Collectors.toList());
+    }
     /**
      * @return the profesors's description as a string in the following format:
      * <format>
@@ -145,7 +151,7 @@ public class ProfesorImpl implements Profesor{
 
     @Override
     public String toString(){
-
+        return ("Profesor: " + name + ".\nId: " +id + ".\nfavorites: " +favorites.toString());
     }
 
 
@@ -162,7 +168,7 @@ public class ProfesorImpl implements Profesor{
 
     @Override
     public boolean equals(Object o){
-        return (eq(o) && ((Profesor)o).eq(this));
+        return (eq(o) && ((ProfesorImpl)o).eq(this));
     }
 
     @Override
