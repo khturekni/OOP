@@ -76,7 +76,11 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             throw new Profesor.ProfesorNotInSystemException();
         if(p1.equals(p2))
             throw new Profesor.SameProfesorException();
-        // TODO: finish!!!
+        if(p1.getFriends().contains(p2) || p2.getFriends().contains(p1))
+            throw Profesor.ConnectionAlreadyExistsException();
+        p1.addFriend(p2);
+        p2.addFriend(p1);
+        return this;
 
     }
 
@@ -107,8 +111,24 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             throw new Profesor.ProfesorNotInSystemException();
         if(!casas.contains(c))
             throw new CasaDeBurrito.CasaDeBurritoNotInSystemException();
-        // TODO: finish!
-
+        if(t<0)
+            throw new CartelDeNachos.ImpossibleConnectionException();
+        if(p.favorites().contains(c))
+            return true;
+        HashSet<Profesor> pFriends = new HashSet<Profesor>();
+        pFriends.add(p);
+        for (int i = 0; i < t; i++){
+            HashSet<Profesor> tempFriends = new HashSet<Profesor>();
+            for(Profesor prof : pFriends){
+                tempFriends.addAll(prof.getFriends());
+            }
+            pFriends.addAll(tempFriends);
+        }
+        for(Profesor prof : pFriends){
+            if(prof.favorites().contains(c))
+                return true;
+        }
+        return false;
     }
 
     @Override
