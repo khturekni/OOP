@@ -24,22 +24,22 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
 
     @Override
     public int getId() {
-        return this.id;
+        return id;
     }
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     @Override
     public int distance() {
-        return this.dist;
+        return dist;
     }
 
     @Override
     public boolean isRatedBy(Profesor p) {
-        return this.ratings.containsKey(p.getId());
+        return ratings.containsKey(p.getId());
     }
 
     @Override
@@ -48,18 +48,18 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         if (r < 0 || r > 5) {
             throw new RateRangeException();
         }
-        this.ratings.put(p.getId(), r);
+        ratings.put(p.getId(), r);
         return this;
     }
 
     @Override
     public int numberOfRates() {
-        return this.ratings.size();
+        return ratings.size();
     }
 
     @Override
     public double averageRating() {
-        if (this.ratings.isEmpty()) {
+        if (ratings.isEmpty()) {
             return 0;
         }
         List<Integer> rates = new ArrayList<Integer>(ratings.values());
@@ -82,8 +82,8 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
     }
 
     @Override
-    public int hashCode(){
-        return (int)((((1+Math.sqrt(5))/2)*this.getId()) % 503);
+    public int hashCode() {
+        return (int) ((((1 + Math.sqrt(5)) / 2) * this.getId()) % 503);
     }
 
     @Override
