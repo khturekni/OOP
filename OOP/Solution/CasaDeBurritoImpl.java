@@ -7,9 +7,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
-    private int id;
+    private Integer id;
     private String name;
-    private int dist;
+    private Integer dist;
     private TreeSet<String> menu;
     private TreeMap<Integer, Integer> ratings;
 
@@ -22,46 +22,26 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         ratings = new TreeMap<Integer, Integer>();
     }
 
-    /**
-     * @return the id of the casa de burrito.
-     */
     @Override
     public int getId() {
         return this.id;
     }
 
-    /**
-     * @return the name of the casa de burrito.
-     */
     @Override
     public String getName() {
         return this.name;
     }
 
-    /**
-     * @return the distance from the Technion.
-     */
     @Override
     public int distance() {
         return this.dist;
     }
 
-    /**
-     * @param p - a profesor
-     * @return true iff the profesor rated this CasaDeBurrito
-     */
     @Override
     public boolean isRatedBy(Profesor p) {
         return this.ratings.containsKey(p.getId());
     }
 
-    /**
-     * rate the CasaDeBurrito by a profesor
-     *
-     * @param p - the profesor rating the CasaDeBurrito
-     * @param r - the rating
-     * @return the object to allow concatenation of function calls.
-     */
     @Override
     public OOP.Provided.CasaDeBurrito rate(Profesor p, int r)
             throws OOP.Provided.CasaDeBurrito.RateRangeException {
@@ -72,17 +52,11 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         return this;
     }
 
-    /**
-     * @return the number of rating the CasaDeBurrito has received
-     */
     @Override
     public int numberOfRates() {
         return this.ratings.size();
     }
 
-    /**
-     * @return the CasaDeBurrito's average rating
-     */
     @Override
     public double averageRating() {
         if (this.ratings.isEmpty()) {
@@ -96,33 +70,27 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         return (double) sum / (double) (this.numberOfRates());
     }
 
-    /**
-     * @return the CasaDeBurrito's description as a string in the following format:
-     * <format>
-     * CasaDeBurrito: <name>.
-     * Id: <id>.
-     * Distance: <dist>.
-     * Menu: <menuItem1, menuItem2, menuItem3...>.
-     * </format>
-     * Note: Menu items are ordered by lexicographical order, asc.
-     * <p>
-     * Example:
-     * <p>
-     * CasaDeBurrito: BBB.
-     * Id: 1.
-     * Distance: 5.
-     * Menu: Cola, French Fries, Steak.
-     */
+    protected boolean eq(Object o) {
+        if (!(o instanceof CasaDeBurritoImpl))
+            return false;
+        return ((CasaDeBurritoImpl)o).getId() == this.getId();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (this.eq(o) && ((CasaDeBurritoImpl)o).eq(this));
+    }
+
     @Override
     public String toString() {
         LinkedList<String> menuList = menu.stream().collect(Collectors.toCollection(LinkedList::new));
-        return ("CasaDeBurrito: " + name + ".\nId: " + id + ".\nDistance: " + dist + ".\nMenu: "+
-        menuList.stream()
-                .sorted((s1, s2) -> s1.compareTo(s2))
-                .collect(Collectors.toList())
-                .toString()
-                .replace("[", "")
-                .replace("]", "."));
+        return ("CasaDeBurrito: " + name + ".\nId: " + id + ".\nDistance: " + dist + ".\nMenu: " +
+                menuList.stream()
+                        .sorted((s1, s2) -> s1.compareTo(s2))
+                        .collect(Collectors.toList())
+                        .toString()
+                        .replace("[", "")
+                        .replace("]", "."));
     }
 
     @Override
