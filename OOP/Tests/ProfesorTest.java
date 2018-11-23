@@ -112,13 +112,13 @@ public class ProfesorTest {
             fail();
         }
 
-        assertTrue(Shredder.getFriends().size() == 1);
+        assertEquals(Shredder.getFriends().size(), 1);
         assertTrue(Shredder.getFriends().contains(Krang));
         assertTrue(Krang.getFriends().isEmpty());
 
-        assertTrue(Leonardo.getFriends().size() == 3);
+        assertEquals(Leonardo.getFriends().size(), 3);
         assertTrue(Michelangelo.getFriends().containsAll(Arrays.asList(Donatello, Leonardo, Rafael)));
-        assertTrue(Michelangelo.getFriends().size() == 3);
+        assertEquals(Michelangelo.getFriends().size() , 3);
         assertTrue(Michelangelo.getFriends().containsAll(Arrays.asList(Donatello, Leonardo, Rafael)));
 
         try {
@@ -163,14 +163,14 @@ public class ProfesorTest {
             fail();
         }
 
-        assertTrue(Student.favoritesByRating(2).equals(Arrays.asList(p4, p3, p2)));
-        assertTrue(Student.favoritesByRating(3).equals(Arrays.asList(p4, p3)));
-        assertTrue(Student.favoritesByRating(4).equals(Arrays.asList(p4)));
+        assertEquals(Student.favoritesByRating(2), (Arrays.asList(p4, p3, p2)));
+        assertEquals(Student.favoritesByRating(3), (Arrays.asList(p4, p3)));
+        assertEquals(Student.favoritesByRating(4), (Arrays.asList(p4)));
         assertTrue(Student.favoritesByRating(5).isEmpty());
     }
 
     @Test
-    public void FavouritesByRating_SeconfdaryOrderTest(){
+    public void FavouritesByRating_SecondaryOrderTest(){
         // PP are defined in the expected order:
         CasaDeBurrito p1 = new CasaDeBurritoImpl(20, "Hut", 15, veggie_topping_pizzas);
         CasaDeBurrito p2 = new CasaDeBurritoImpl(10, "Italiano", 125, traditional_pizzas);
@@ -189,7 +189,7 @@ public class ProfesorTest {
             fail();
         }
 
-        assertTrue(Student.favoritesByRating(1).equals(Arrays.asList(p1, p2, p3, p4)));
+        assertEquals(Student.favoritesByRating(1), (Arrays.asList(p1, p2, p3, p4)));
     }
 
     @Test
@@ -319,13 +319,13 @@ public class ProfesorTest {
             fail();
         }
 
-        String expectedStr = "Pizza lover: Leonardo.\n" +
+        String expectedStr = "Profesor: Leonardo.\n" +
                 "Id: 12345.\n" +
                 "Favorites: Dominos, Hut, Italiano.";
         assertEquals(lover.toString(), expectedStr);
 
         Profesor Donatello = new ProfesorImpl(23456, "Donatello");
-        expectedStr = "Pizza lover: Donatello.\n" +
+        expectedStr = "Profesor: Donatello.\n" +
                 "Id: 23456.\n" +
                 "Favorites: .";
         assertEquals(Donatello.toString(), expectedStr);

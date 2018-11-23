@@ -4,13 +4,14 @@ import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
     private int id;
     private String name;
     private int dist;
     private TreeSet<String> menu;
-    private TreeMap<int, int> ratings;
+    private TreeMap<Integer, Integer> ratings;
 
     public CasaDeBurritoImpl(int id_t, String name_t, int dist_t, Set<String> menu_t) {
         id = id_t;
@@ -18,7 +19,7 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         dist = dist_t;
         menu = new TreeSet<String>();
         menu.addAll(menu_t);
-        ratings = new TreeMap<int, int>();
+        ratings = new TreeMap<Integer, Integer>();
     }
 
     /**
@@ -87,9 +88,9 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
         if (this.ratings.isEmpty()) {
             return 0;
         }
-        List<int> rates = new ArrayList<int>(ratings.values());
+        List<Integer> rates = new ArrayList<Integer>(ratings.values());
         int sum = 0;
-        for (int i; rates) {
+        for (int i : rates) {
             sum += i;
         }
         return (double) sum / (double) (this.numberOfRates());
@@ -114,20 +115,19 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
      */
     @Override
     public String toString() {
-        LinkedList<String> menuList = menu.toList();
-        return ("CasaDeBurrito: " + name + ".\nId: " + id + ".\nDistance: " + dist + ".\nMenu: "
+        LinkedList<String> menuList = menu.stream().collect(Collectors.toCollection(LinkedList::new));
+        return ("CasaDeBurrito: " + name + ".\nId: " + id + ".\nDistance: " + dist + ".\nMenu: "+
         menuList.stream()
-                .sorted((s1, s2) -> s1.compareTo(s2));
+                .sorted((s1, s2) -> s1.compareTo(s2))
                 .collect(Collectors.toList())
                 .toString()
                 .replace("[", "")
                 .replace("]", "."));
     }
 
-}
-
     @Override
     public int compareTo(CasaDeBurrito casaDeBurrito) {
         return this.getId() - casaDeBurrito.getId();
     }
 
+}

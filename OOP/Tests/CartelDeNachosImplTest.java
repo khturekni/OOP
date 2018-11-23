@@ -249,33 +249,33 @@ public class CartelDeNachosImplTest {
 
     @Test
     public void toStringTest() throws Exception {
-        assertEquals("Registered pizza lovers: .\n" +
-                "Registered pizza places: .\n" +
-                "Pizza lovers:\n" +
-                "End pizza lovers.", CartelDeNachos0.toString());
-        assertEquals("Registered pizza lovers: 0, 1, 2, 3.\n" +
-                "Registered pizza places: 0, 1, 2, 3, 4, 5, 6, 7, 8.\n" +
-                "Pizza lovers:\n" +
+        assertEquals("Registered profesores: .\n" +
+                "Registered casas de burrito: .\n" +
+                "Profesores:\n" +
+                "End profesores.", CartelDeNachos0.toString());
+        assertEquals("Registered profesores: 0, 1, 2, 3.\n" +
+                "Registered casas de burrito: 0, 1, 2, 3, 4, 5, 6, 7, 8.\n" +
+                "Profesores:\n" +
                 "0 -> [1, 2, 3].\n" +
                 "1 -> [0, 2, 3].\n" +
                 "2 -> [0, 1].\n" +
                 "3 -> [0, 1].\n" +
-                "End pizza lovers.", CartelDeNachos3.toString());
+                "End profesores.", CartelDeNachos3.toString());
 
         CartelDeNachos CartelDeNachos = new CartelDeNachosImpl();
         CartelDeNachos.joinCartel(1, "One");
-        assertEquals("Registered pizza lovers: 1.\n" +
-                "Registered pizza places: .\n" +
-                "Pizza lovers:\n" +
+        assertEquals("Registered profesores: 1.\n" +
+                "Registered casas de burrito: .\n" +
+                "Profesores:\n" +
                 "1 -> [].\n" +
-                "End pizza lovers.", CartelDeNachos.toString());
+                "End profesores.", CartelDeNachos.toString());
 
         CartelDeNachos = new CartelDeNachosImpl();
         CartelDeNachos.addCasaDeBurrito(1, "One", 0, new HashSet<String>(){{ add("Varenyky"); }});
-        assertEquals("Registered pizza lovers: .\n" +
-                "Registered pizza places: 1.\n" +
-                "Pizza lovers:\n" +
-                "End pizza lovers.", CartelDeNachos.toString());
+        assertEquals("Registered profesores: .\n" +
+                "Registered casas de burrito: 1.\n" +
+                "Profesores:\n" +
+                "End profesores.", CartelDeNachos.toString());
     }
 
     @Test

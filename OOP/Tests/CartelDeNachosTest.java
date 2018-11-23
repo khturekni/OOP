@@ -383,9 +383,9 @@ public class CartelDeNachosTest {
         populateWorld(world);
         setUpConnections(world);
 
-		String expectedStr = "Registered pizza lovers: 1, 300, 12345, 23456, 45678, 56789, 67891, 78910, 89101.\n" +
-				"Registered pizza places: 10, 20, 30, 40, 50, 60, 70.\n" +
-				"Pizza lovers:\n" +
+		String expectedStr = "Registered profesores: 1, 300, 12345, 23456, 45678, 56789, 67891, 78910, 89101.\n" +
+				"Registered casas de burrito: 10, 20, 30, 40, 50, 60, 70.\n" +
+				"Profesores:\n" +
 				"1 -> [12345, 23456, 45678, 56789].\n" +
 				"300 -> [].\n" +
 				"12345 -> [1, 23456, 45678, 56789, 67891].\n" +
@@ -395,7 +395,7 @@ public class CartelDeNachosTest {
 				"67891 -> [12345, 23456, 45678, 56789, 78910].\n" +
 				"78910 -> [67891, 89101].\n" +
 				"89101 -> [78910].\n" +
-				"End pizza lovers.";
+				"End profesores.";
 		assertEquals(world.toString(), expectedStr);
 
 		cleanUpPlacesAndUsers();

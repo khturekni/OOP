@@ -211,16 +211,16 @@ public class ProfesorImplTest {
 
     @Test
     public void toStringTest() throws Exception {
-        assertEquals(Profesor69.toString(), "Pizza lover: Sixty Nine.\nId: 69.\nFavorites: ."); //TODO: check it
+        assertEquals(Profesor69.toString(), "Profesor: Sixty Nine.\nId: 69.\nFavorites: ."); //TODO: check it
         CasaDeBurrito7.rate(Profesor69, 4);
         Profesor69.favorite(CasaDeBurrito7);
-        assertEquals(Profesor69.toString(), "Pizza lover: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven."); //TODO: check it
+        assertEquals(Profesor69.toString(), "Profesor: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven."); //TODO: check it
         CasaDeBurritoAngels.rate(Profesor69, 4);
         Profesor69.favorite(CasaDeBurritoAngels);
-        assertEquals(Profesor69.toString(), "Pizza lover: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven, Why don't we know - We are the angels."); //TODO: check it
+        assertEquals(Profesor69.toString(), "Profesor: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven, Why don't we know - We are the angels."); //TODO: check it
         CasaDeBurritoZoo.rate(Profesor69, 5);
         Profesor69.favorite(CasaDeBurritoZoo);
-        assertEquals(Profesor69.toString(), "Pizza lover: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven, Why don't we know - We are the angels, Zoo."); //TODO: check it
+        assertEquals(Profesor69.toString(), "Profesor: Sixty Nine.\nId: 69.\nFavorites: We are the seven judgment of heaven, Why don't we know - We are the angels, Zoo."); //TODO: check it
     }
 
     @Test
