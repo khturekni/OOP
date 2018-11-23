@@ -73,12 +73,17 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
     protected boolean eq(Object o) {
         if (!(o instanceof CasaDeBurritoImpl))
             return false;
-        return ((CasaDeBurritoImpl)o).getId() == this.getId();
+        return ((CasaDeBurritoImpl) o).getId() == this.getId();
     }
 
     @Override
     public boolean equals(Object o) {
-        return (this.eq(o) && ((CasaDeBurritoImpl)o).eq(this));
+        return (this.eq(o) && ((CasaDeBurritoImpl) o).eq(this));
+    }
+
+    @Override
+    public int hashCode(){
+        return (int)((((1+Math.sqrt(5))/2)*this.getId()) % 503);
     }
 
     @Override
