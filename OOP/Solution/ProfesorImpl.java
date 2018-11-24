@@ -32,7 +32,8 @@ public class ProfesorImpl implements Profesor {
         if (!c.isRatedBy(this)) {
             throw new UnratedFavoriteCasaDeBurritoException();
         }
-        favorites.add(c);
+        if(!favorites.contains(c))
+            favorites.add(c);
         return this;
     }
 
@@ -84,18 +85,19 @@ public class ProfesorImpl implements Profesor {
         return favoritesByPred(cdb -> cdb.distance() <= dLimit, false);
     }
 
-    private Collection<CasaDeBurrito> favoritesByPred(Predicate<CasaDeBurrito> p, boolean by_rate) {
+    private Collection<CasaDeBurrito> favoritesByPred(Predicate<? super CasaDeBurrito> p, boolean by_rate) {
         return favorites.stream()
                 .filter(p)
                 .sorted(compareByRateOrDist(by_rate))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
     public String toString() {
         return ("Profesor: " + name + ".\nId: " + id + ".\nFavorites: " +
                 favorites.stream()
-                        .map(c -> c.getName())
+                        .map(CasaDeBurrito::getName)
+                        .sorted()
                         .collect(Collectors.toList())
                         .toString()
                         .replace("[", "")
@@ -127,23 +129,22 @@ public class ProfesorImpl implements Profesor {
     public class compareByRating implements Comparator<CasaDeBurrito> {
         @Override
         public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2) {
-            return (int) (cdb1.averageRating() - cdb2.averageRating());
+            return (int) (cdb2.averageRating() - cdb1.averageRating());
         }
     }
 
     public class compareByDistance implements Comparator<CasaDeBurrito> {
         @Override
         public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2) {
-            return (cdb2.distance() - cdb1.distance());
+            return ( cdb1.distance() - cdb2.distance());
         }
     }
 
     public class compareByID implements Comparator<CasaDeBurrito> {
         @Override
         public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2) {
-            return (cdb2.getId() - cdb1.getId());
+            return (cdb1.getId() - cdb2.getId());
         }
-
     }
 
     private Comparator<CasaDeBurrito> compareByRateOrDist(boolean by_rate) {
