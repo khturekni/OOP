@@ -148,8 +148,38 @@ public class CartelDeNachosImpl implements CartelDeNachos{
 
     @Override
     public List<Integer> getMostPopularRestaurantsIds(){
-        // TODO: finish!!!!
-        return new LinkedList<>();
+        if(casas.isEmpty()){
+            return new LinkedList<>();
+        }
+        HashMap<Integer,Integer> allCasas = new HashMap<>();
+        for(CasaDeBurrito c : casas){
+            allCasas.put(c.getId(),0);
+        }
+        for(Profesor prof : profesors){
+            LinkedList<Profesor> pFriends = prof.getFriends();
+            for(Profesor pF : pFriends){
+                HashSet<CasaDeBurrito> favs = pF.favorites();
+                for(CasaDeBurrito c : favs){
+                    Integer curRank = allCasas.get(c.getId()) + 1;
+                    allCasas.put(c.getId(),curRank);
+                }
+            }
+        }
+        Integer max = 0;
+        Collection<Integer> allValues = allCasas.values();
+        for(Integer v : allValues){
+            if (v > max){
+                max = v;
+            }
+        }
+        LinkedList<Integer> popularCasas = new LinkedList<>();
+        Set<Integer> allKeys = allCasas.keySet();
+        for(Integer i : allKeys){
+            if(allCasas.get(i) == max){
+                popularCasas.add(i);
+            }
+        }
+        Collections.sort(popularCasas);
     }
 
     @Override
