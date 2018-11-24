@@ -7,6 +7,7 @@ import OOP.Provided.Profesor;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CartelDeNachosImpl implements CartelDeNachos{
 
@@ -88,21 +89,31 @@ public class CartelDeNachosImpl implements CartelDeNachos{
     @Override
     public Collection<CasaDeBurrito> favoritesByRating(Profesor p)
             throws Profesor.ProfesorNotInSystemException{
-        if(!profesors.contains(p))
-            throw new Profesor.ProfesorNotInSystemException();
-        // TODO: finish!
-        return new LinkedList<>();
-
+        return favoriteByMap(p, true);
     }
 
     @Override
     public  Collection<CasaDeBurrito> favoritesByDist(Profesor p)
             throws Profesor.ProfesorNotInSystemException{
+        return favoriteByMap(p, false);
+    }
+
+    private Collection<CasaDeBurrito> favoriteByMap(Profesor p, boolean by_rate)
+            throws Profesor.ProfesorNotInSystemException{
         if(!profesors.contains(p))
             throw new Profesor.ProfesorNotInSystemException();
-        // TODO: finish!
-        return new LinkedList<>();
-
+        LinkedList<Collection<CasaDeBurrito>> tmp =  (p.getFriends().stream()
+                .sorted()
+                .map(by_rate ?
+                        profesor -> profesor.favoritesByRating(0) :
+                        profesor -> profesor.favoritesByDist(Integer.MAX_VALUE)
+                )
+                .collect(Collectors.toCollection(LinkedList::new)));
+        Collection<CasaDeBurrito> ret = tmp.getFirst();
+        for (Collection<CasaDeBurrito> c: tmp) {
+            ret.addAll(c);
+        }
+        return ret.stream().distinct().collect(Collectors.toList());
     }
 
     @Override
@@ -125,7 +136,8 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             for(Profesor prof : pFriends){
                 tempFriends.addAll(prof.getFriends());
             }
-            pFriends.addAll(tempFriends);
+            if(!pFriends.addAll(tempFriends))   //returns true if modified and false otherwise
+                break;
         }
         for(Profesor prof : pFriends){
             if(prof.favorites().contains(c))
@@ -136,7 +148,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
 
     @Override
     public List<Integer> getMostPopularRestaurantsIds(){
-
+        // TODO: finish!!!!
         return new LinkedList<>();
     }
 
