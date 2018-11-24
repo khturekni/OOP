@@ -180,6 +180,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             }
         }
         Collections.sort(popularCasas);
+        return popularCasas;
     }
 
     @Override
