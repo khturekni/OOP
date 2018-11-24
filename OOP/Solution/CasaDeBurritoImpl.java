@@ -39,6 +39,9 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
 
     @Override
     public boolean isRatedBy(Profesor p) {
+        if(p == null){
+            return false;
+        }
         return ratings.containsKey(p.getId());
     }
 

@@ -7,7 +7,6 @@ import OOP.Provided.Profesor;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CartelDeNachosImpl implements CartelDeNachos{
 
@@ -100,7 +99,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
 
     private Collection<CasaDeBurrito> favoriteByMap(Profesor p, boolean by_rate)
             throws Profesor.ProfesorNotInSystemException{
-        if(!profesors.contains(p))
+        if(p == null || !profesors.contains(p))
             throw new Profesor.ProfesorNotInSystemException();
         LinkedList<Collection<CasaDeBurrito>> tmp =  (p.getFriends().stream()
                 .sorted()
@@ -156,9 +155,9 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             allCasas.put(c.getId(),0);
         }
         for(Profesor prof : profesors){
-            LinkedList<Profesor> pFriends = prof.getFriends();
+            Set<Profesor> pFriends = prof.getFriends();
             for(Profesor pF : pFriends){
-                HashSet<CasaDeBurrito> favs = pF.favorites();
+                Collection<CasaDeBurrito> favs = pF.favorites();
                 for(CasaDeBurrito c : favs){
                     Integer curRank = allCasas.get(c.getId()) + 1;
                     allCasas.put(c.getId(),curRank);
