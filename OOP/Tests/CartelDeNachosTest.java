@@ -373,10 +373,10 @@ public class CartelDeNachosTest {
 		CartelDeNachos world = new CartelDeNachosImpl();
 
 		// Initial state:
-		String emptyWorldExpectedStr = "Registered pizza lovers: .\n" +
-				"Registered pizza places: .\n" +
-				"Pizza lovers:\n" +
-				"End pizza lovers.";
+		String emptyWorldExpectedStr = "Registered profesores: .\n" +
+				"Registered casas de burrito: .\n" +
+				"Profesores:\n" +
+				"End profesores.";
 		assertEquals(world.toString(), emptyWorldExpectedStr);
 
 		// Now, let's add some contents to the world:

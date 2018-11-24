@@ -5,6 +5,7 @@ import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CartelDeNachosImpl implements CartelDeNachos{
@@ -77,7 +78,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
         if(p1.equals(p2))
             throw new Profesor.SameProfesorException();
         if(p1.getFriends().contains(p2) || p2.getFriends().contains(p1))
-            throw Profesor.ConnectionAlreadyExistsException();
+            throw new Profesor.ConnectionAlreadyExistsException();
         p1.addFriend(p2);
         p2.addFriend(p1);
         return this;
@@ -90,6 +91,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
         if(!profesors.contains(p))
             throw new Profesor.ProfesorNotInSystemException();
         // TODO: finish!
+        return new LinkedList<>();
 
     }
 
@@ -99,6 +101,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
         if(!profesors.contains(p))
             throw new Profesor.ProfesorNotInSystemException();
         // TODO: finish!
+        return new LinkedList<>();
 
     }
 
@@ -134,11 +137,37 @@ public class CartelDeNachosImpl implements CartelDeNachos{
     @Override
     public List<Integer> getMostPopularRestaurantsIds(){
 
+        return new LinkedList<>();
     }
 
     @Override
     public String toString(){
+        String registered_profesor = "Registered profesores: " +
+                                        getIdsString(profesors, profesor ->( (Profesor)profesor).getId());
 
+        String registered_cassas = "Registered casas de burrito: " +
+                                        getIdsString(casas, casa -> ((CasaDeBurrito)casa).getId());
+
+        String profesors_string = "Profesores:\n";
+        LinkedList<Profesor> sorted_profs = profesors.stream()
+                                                    .sorted()
+                                                    .collect(Collectors.toCollection(LinkedList::new));
+        for (Profesor p: sorted_profs) {
+            profesors_string += Integer.toString(p.getId()) + " -> [" +
+                    getIdsString(p.getFriends(), profesor ->( (Profesor)profesor).getId())
+                    .replace(".\n", "].\n");
+        }
+        profesors_string +="End profesores.";
+        return registered_profesor + registered_cassas + profesors_string;
+    }
+    private String getIdsString(Collection<?> collection, Function<? super Object , ? super Integer> mapper){
+        return collection.stream()
+                .map(mapper)
+                .sorted()
+                .collect(Collectors.toList())
+                .toString()
+                .replace("[", "")
+                .replace("]", ".\n");
     }
 
 }
