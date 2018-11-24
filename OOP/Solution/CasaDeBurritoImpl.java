@@ -83,6 +83,7 @@ public class CasaDeBurritoImpl implements OOP.Provided.CasaDeBurrito {
 
     @Override
     public int hashCode() {
+        // We decided to use the following hash function:
         return (int) ((((1 + Math.sqrt(5)) / 2) * this.getId()) % 503);
     }
 
