@@ -126,7 +126,7 @@ public class ProfesorImpl implements Profesor {
         return (int) ((((1 + Math.sqrt(5)) / 2) * id) % 503);
     }
 
-    public class compareByRating implements Comparator<CasaDeBurrito> {
+    public class compareByAvgRating implements Comparator<CasaDeBurrito> {
         @Override
         public int compare(CasaDeBurrito cdb1, CasaDeBurrito cdb2) {
             return (int) (cdb2.averageRating() - cdb1.averageRating());
@@ -149,11 +149,11 @@ public class ProfesorImpl implements Profesor {
 
     private Comparator<CasaDeBurrito> compareByRateOrDist(boolean by_rate) {
         if (by_rate)
-            return new compareByRating()
+            return new compareByAvgRating()
                     .thenComparing(new compareByDistance()
                             .thenComparing(new compareByID()));
         return new compareByDistance()
-                .thenComparing(new compareByRating()
+                .thenComparing(new compareByAvgRating()
                         .thenComparing(new compareByID()));
     }
 }

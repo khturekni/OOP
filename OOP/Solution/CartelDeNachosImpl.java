@@ -88,7 +88,8 @@ public class CartelDeNachosImpl implements CartelDeNachos{
     @Override
     public Collection<CasaDeBurrito> favoritesByRating(Profesor p)
             throws Profesor.ProfesorNotInSystemException{
-        return favoriteByMap(p, true);
+        Collection<CasaDeBurrito> tmp =favoriteByMap(p, true);
+        return tmp;
     }
 
     @Override
@@ -130,6 +131,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             return true;
         HashSet<Profesor> pFriends = new HashSet<Profesor>();
         pFriends.add(p);
+        // collect all the friends of the profesor of distance at most t
         for (int i = 0; i < t; i++){
             HashSet<Profesor> tempFriends = new HashSet<Profesor>();
             for(Profesor prof : pFriends){
@@ -138,11 +140,11 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             if(!pFriends.addAll(tempFriends))   //returns true if modified and false otherwise
                 break;
         }
-        for(Profesor prof : pFriends){
-            if(prof.favorites().contains(c))
-                return true;
-        }
-        return false;
+        // if at least 1 profesor favorites the casa c, then the received set won't be empty
+        Set<Profesor> prof_list = pFriends.stream()
+                                            .filter(prof -> prof.favorites().contains(c))
+                                            .collect(Collectors.toSet());
+        return !prof_list.isEmpty();
     }
 
     @Override
@@ -151,9 +153,11 @@ public class CartelDeNachosImpl implements CartelDeNachos{
             return new LinkedList<>();
         }
         HashMap<Integer,Integer> allCasas = new HashMap<>();
+        // initialize a map with the ID's of the casas, and rate = 0.
         for(CasaDeBurrito c : casas){
             allCasas.put(c.getId(),0);
         }
+        // calculate how much popularity each profesor adds to each casa.
         for(Profesor prof : profesors){
             Set<Profesor> pFriends = prof.getFriends();
             for(Profesor pF : pFriends){
@@ -171,6 +175,7 @@ public class CartelDeNachosImpl implements CartelDeNachos{
                 max = v;
             }
         }
+        // get the collection of casas with the maximal value
         LinkedList<Integer> popularCasas = new LinkedList<>();
         Set<Integer> allKeys = allCasas.keySet();
         for(Integer i : allKeys){

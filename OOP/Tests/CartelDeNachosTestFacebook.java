@@ -244,11 +244,11 @@ public class CartelDeNachosTestFacebook {
         /***************** Yoni's printings *******************/
 //
 //        System.out.println(favoritesByRatingIter.next().getId());
-//        System.out.println(favoritesByRatingIter.next().getId());
-//        System.out.println(favoritesByRatingIter.next().getId());
-//        assertFalse(favoritesByRatingIter.hasNext());
-        assertEquals(22, favoritesByRatingIter.next().getId());
+  //      System.out.println(favoritesByRatingIter.next().getId());
+    //    System.out.println(favoritesByRatingIter.next().getId());
+   //     assertFalse(favoritesByRatingIter.hasNext());
         assertEquals(11, favoritesByRatingIter.next().getId());
+        assertEquals(22, favoritesByRatingIter.next().getId());
         assertEquals(33, favoritesByRatingIter.next().getId());
         assertFalse(favoritesByRatingIter.hasNext());
     }
